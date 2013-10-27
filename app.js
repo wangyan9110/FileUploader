@@ -34,7 +34,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/file',file.index);
 app.get('/file/index',file.index);
 app.all('/file/uploader',file.uploader);
