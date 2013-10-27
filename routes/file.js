@@ -5,37 +5,47 @@
  * Date:2013-10-26 14:50
  * Version:V1.0.0.0
  * Email:yywang1991@gmail.com
- * Describe: 请描述本文件功能
- *
+ * Describe:   文件上传类
  * Change Record:
  * {        date    name    describe}
  *
  */
 
+var fs = require('fs');
+var utils = require('../utils/fileUtils');
+var promise = require('promise');
+
 function uploader(req, res) {
-    if (req.xhr) {
-        var fs=require('fs');
-        var fileName=req.header('x-file-name');
-        console.log(fileName);
-        var ws=fs.createWriteStream(getfilePath(fileName));
-        req.on('data',function(data){
-            ws.write(data);
-        });
+    if (req.files != 'undifined') {
+        var tempPath = req.files.file[0].path;
+        var name = req.files.file[0].name;
+        if (tempPath) {
+            utils.mkDir().then(function (path) {
+                var rename = promise.denodeify(fs.rename);
+                rename(tempPath, path + name);
+            }).then(function () {
+                    var unlink = promise.denodeify(fs.unlink);
+                    unlink(tempPath);
+                }).then(function () {
+                    res.send('{code:1,des:"上传成功"}');
+                });
+        }
     }
 }
 
-function getfilePath(fileName) {
-    var basePath = '/UploadFile/';
-    var day = new Day();
-    var dayStr = day.getFullYear() + '-' + day.getMonth() + '-' + day.getDate();
-    return basePath + dayStr + '/' + day.getTime() + '/' + fileName;
+function sendUploadSuccess(res) {
+    res.send('{code:1,des:"上传成功"}');
 }
 
-function index(req, res){
+function sendUploadFailed(res) {
+    res.send('{code:0,des:"上传失败"}');
+}
+
+function index(req, res) {
     res.render('file');
 }
 
 
 exports.uploader = uploader;
-exports.index=index;
+exports.index = index;
 

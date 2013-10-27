@@ -15,7 +15,8 @@ window.uploader = {};
 
 (function (document, uploader) {
 
-    var _self={};
+    var _self = {};
+
     function uploader(args) {
         this._id = args.id;
         this._url = args.url;
@@ -30,7 +31,7 @@ window.uploader = {};
             this._drop = args.events.drop || {};
             this._progress = args.events.progress || {};
         }
-        _self=this;
+        _self = this;
     }
 
     uploader.prototype = {
@@ -46,6 +47,7 @@ window.uploader = {};
             var formData = this._createFormData(files);
             this._xhr.open('post', this._url, true);
             this._xhr.send(formData);
+            console.log(this._xhr.responseText);
         },
         _bindDragEvent: function () {
             $(this._id).addEventListener('dragenter', function (e) {
@@ -77,16 +79,25 @@ window.uploader = {};
         },
         _bindXhrEvent: function () {
             this._xhr.upload.onload = function (e) {
-
+                console.dir(e);
+                console.log('上传完成');
+            };
+            this._xhr.upload.onloadend = function (e) {
+                console.dir(_self._xhr.response);
             };
             this._xhr.upload.onprogress = function (e) {
-
+                console.dir(e);
             };
             this._xhr.upload.onerror = function (e) {
 
             };
             this._xhr.upload.ontimeout = function (e) {
 
+            }
+            this._xhr.onreadystatechange = function () {
+                if (_self._xhr.readyState == 4 && _self._xhr.status == 200) {
+                    console.log(_self._xhr.responseText);
+                }
             }
         },
         _createFormData: function (files) {
