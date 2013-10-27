@@ -52,7 +52,7 @@ window.uploader = {};
             this._xhr.send(formData);
         },
         _bindEvents: function () {
-            _self=this;
+            _self = this;
             this._xhr.upload.loadstart = function (e) {
                 evalFunction(_self.onloadstart, e);
             }
@@ -73,7 +73,7 @@ window.uploader = {};
             }
 
             this._xhr.onreadystatechange = function () {
-                _self=this;
+                _self = this;
                 if (_self._xhr.readyState == 4) {
                     if (typeof _self.callback === 'function') {
                         var status = _self._xhr.status;
@@ -90,14 +90,18 @@ window.uploader = {};
             return formData;
         },
         _addDataToFormData: function (formData) {
-            for (var item in this._data) {
-                formData.append(item, this._data[item]);
+            if (this._data) {
+                for (var item in this._data) {
+                    formData.append(item, this._data[item]);
+                }
             }
         },
         _addFileToFormData: function (formData) {
-            for (var i = 0; i < this._files.length; i++) {
-                var file = this._files[i];
-                formData.append('file[' + i + ']', this._files[i]);
+            if (this._files && typeof this._files === 'array') {
+                for (var i = 0; i < this._files.length; i++) {
+                    var file = this._files[i];
+                    formData.append('file[' + i + ']', this._files[i]);
+                }
             }
         }
     };
