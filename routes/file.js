@@ -17,19 +17,29 @@ var promise = require('promise');
 
 function uploader(req, res) {
     if (req.files != 'undifined') {
-        var tempPath = req.files.file[0].path;
-        var name = req.files.file[0].name;
-        if (tempPath) {
-            utils.mkDir().then(function (path) {
-                var rename = promise.denodeify(fs.rename);
-                rename(tempPath, path + name);
-            }).then(function () {
-                    var unlink = promise.denodeify(fs.unlink);
-                    unlink(tempPath);
-                }).then(function () {
+        console.dir(req.files);
+        utils.mkDir().then(function (path) {
+            uploadFile(req, res, path, 0);
+        });
+
+    }
+}
+
+function uploadFile(req, res, path, index) {
+    var tempPath = req.files.file[index].path;
+    var name = req.files.file[index].name;
+    if (tempPath) {
+        var rename = promise.denodeify(fs.rename);
+        rename(tempPath, path + name).then(function () {
+            var unlink = promise.denodeify(fs.unlink);
+            unlink(tempPath);
+        }).then(function () {
+                if (index == req.files.file.length - 1) {
                     res.send('{code:1,des:"上传成功"}');
-                });
-        }
+                } else {
+                    uploadFile(req, res, path, index + 1);
+                }
+            });
     }
 }
 

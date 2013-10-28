@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+	<head>
+		<title/>
+	</head>
+	<body>
+		<outline title="前端开发博客" text="前端开发博客">
+			<outline htmlUrl="http://nuysoft.github.com" xmlUrl="http://nuysoft.com/rss.xml" version="RSS" type="rss" title="nuysoft's blog" text="nuysoft's blog"/>
+			<outline htmlUrl="http://ued.sina.com.cn" xmlUrl="http://ued.sina.com.cn/?feed=rss" version="RSS" type="rss" title="新浪UED" text="新浪UED"/>
+			<outline htmlUrl="http://mux.baidu.com" xmlUrl="http://mux.baidu.com/?feed=rss2" version="RSS" type="rss" title="百度MUX" text="百度MUX"/>
+			<outline htmlUrl="http://udc.weibo.com" xmlUrl="http://udc.weibo.com/feed/" version="RSS" type="rss" title="微博UDC" text="微博UDC"/>
+			<outline htmlUrl="http://cdc.tencent.com" xmlUrl="http://cdc.tencent.com/?feed=rss2" version="RSS" type="rss" title="腾讯CDC" text="腾讯CDC"/>
+			<outline htmlUrl="http://www.75team.com" xmlUrl="http://www.75team.com/feed" version="RSS" type="rss" title="奇舞团" text="奇舞团"/>
+			<outline htmlUrl="http://www.silverna.org/blog" xmlUrl="http://www.silverna.org/blog/?feed=rss2" version="RSS" type="rss" title="十年踪迹" text="十年踪迹"/>
+			<outline htmlUrl="http://www.cnblogs.com/rubylouvre/rss.aspx" xmlUrl="http://www.cnblogs.com/rubylouvre/rss.aspx" version="RSS" type="rss" title="博客园_Ruby's Louvre" text="博客园_Ruby's Louvre"/>
+		</outline>
+		<outline title="综合社区" text="综合社区">
+			<outline htmlUrl="http://feed.cnblogs.com/blog/picked/rss" xmlUrl="http://feed.cnblogs.com/blog/picked/rss" version="RSS" type="rss" title="博客园_精华区" text="博客园_精华区"/>
+			<outline htmlUrl="http://sd.csdn.net" xmlUrl="http://sd.csdn.net/rss_sd.html" version="RSS" type="rss" title="CSDN 软件研发频道(资讯)" text="CSDN 软件研发频道(资讯)"/>
+			<outline htmlUrl="http://www.ibm.com/developerworks/cn/" xmlUrl="http://www.ibm.com/developerworks/cn/views/global/rss/libraryview.jsp" version="RSS" type="rss" title="IBM developerWorks 中国 : 文档库" text="IBM developerWorks 中国 : 文档库"/>
+			<outline htmlUrl="http://www.oschina.net?from=rss" xmlUrl="http://www.oschina.net/blog/rss" version="RSS" type="rss" title="开源中国社区最新推荐博客" text="开源中国社区最新推荐博客"/>
+			<outline htmlUrl="http://www.infoq.com/cn/" xmlUrl="http://www.infoq.com/cn/rss/rss.action?token=gRElftAVd2E81mEusYGp8KOG8HVd3LCv" version="RSS" type="rss" title="未注册用户的 InfoQ 个性化 RSS Feed " text="未注册用户的 InfoQ 个性化 RSS Feed "/>
+		</outline>
+		<outline title="综合博客" text="综合博客">
+			<outline htmlUrl="http://martinfowler.com" xmlUrl="http://martinfowler.com/feed.atom" version="RSS" type="rss" title="Martin Fowler" text="Martin Fowler"/>
+		</outline>
+	</body>
+</opml>

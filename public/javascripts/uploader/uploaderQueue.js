@@ -9,7 +9,7 @@
  */
 
 
-window.uploaderQueue={};
+window.uploaderQueue = {};
 
 /**
  * the queue
@@ -71,6 +71,12 @@ window.uploaderQueue={};
             }
             return -1;
         },
+        getDataByIndex: function (index) {
+            if (index < 0) {
+                return null;
+            }
+            return this._datas[index];
+        },
         _getIndexByKey: function (key) {
             for (var i = 0; i < this._datas.length; i++) {
                 if (this._datas[i].key == key) {
@@ -107,6 +113,7 @@ window.uploaderQueue={};
         this._url = null;
         this._curUploadingKey = -1;//标志
         this.uploadStatusChanged = {};
+        this.uploadItemProgress={};
         _self = this;
     }
 
@@ -130,27 +137,32 @@ window.uploaderQueue={};
             }
         },
         _uploadItem: function (index) {
-            var data = this._datas[index].data;
+            var data = upladerQueue.Queue.getDataByIndex(index).data;
             _self = this;
             this._readyUploadItem(index);
-            var upload = uploader.send(this._url, null, data.files, function (status, data) {
+            var upload = uploaderFactory.send(this._url, null, data.files, function (status, data) {
                 _self._completedUploadItem.call(_self, status, data);
             });
+
             this._uploadItemProgress(upload);
         },
         _uploadItemProgress: function (upload) {
             upload.onprogress = function (e) {
-                console.dir(e);
+               _self.uploadItemProgress(_self._curUploadingKey,e);
             }
         },
         _readyUploadItem: function (index) {
-            this._curUploadingKey = this._datas[index].key;
-            this.uploadStatusChanged(this._curUploadingKey, upladerQueue.UploadStatus.Uploading);
-            upladerQueue.Queue.setItemStatus.call(this, this._curUploadingKey, upladerQueue.UploadStatus.Uploading);
+            this._curUploadingKey = upladerQueue.Queue.getDataByIndex(index).key;
+            if (typeof this.uploadStatusChanged === 'function') {
+                this.uploadStatusChanged(this._curUploadingKey, upladerQueue.UploadStatus.Uploading);
+            }
+            upladerQueue.Queue.setItemStatus(this._curUploadingKey, upladerQueue.UploadStatus.Uploading);
         },
         _completedUploadItem: function (status, data) {
-            this.uploadStatusChanged(this._curUploadingKey, upladerQueue.UploadStatus.Complete);
-            upladerQueue.Queue.setItemStatus.call(this, this._curUploadingKey, upladerQueue.UploadStatus.Complete);
+            if (typeof this.uploadStatusChanged === 'function') {
+                this.uploadStatusChanged(this._curUploadingKey, upladerQueue.UploadStatus.Complete);
+            }
+            upladerQueue.Queue.setItemStatus(this._curUploadingKey, upladerQueue.UploadStatus.Complete);
             this._startUpload();
         }
     };

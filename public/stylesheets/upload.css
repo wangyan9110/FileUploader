@@ -49,10 +49,10 @@
 }
 
 .inline_mask {
-    width: 582px;
+    width: 1px;
     height: 38px;
     position: absolute;
-    z-index: 0;
+    z-index: -1;
     background: #f5f7ff -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(153, 209, 255, .8)), color-stop(.5, rgba(132, 199, 255, .8)), color-stop(1, rgba(108, 188, 255, .8)));
 }
 

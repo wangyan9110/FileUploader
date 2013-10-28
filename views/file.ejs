@@ -3,18 +3,22 @@
 <head>
     <title></title>
     <link type="text/css" href="/stylesheets/upload.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="/javascripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/javascripts/uploader/uploader.js"></script>
+    <script type="text/javascript" src="/javascripts/uploader/uploaderQueue.js"></script>
     <script type="text/javascript" src="/javascripts/uploader/uploaderApp.js"></script>
+    <script type="text/javascript" src="/javascripts/uploader.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" id='container'>
     <div class="header">
-        <strong class="title_status" id="uploadDialogHeadlineStrong">上传完成</strong>
+        <strong class="title_status" id="uploadDialogHeadlineStrong">请将文件拖曳至框内</strong>
 
         <div class="sprite_new"></div>
     </div>
     <div id="uploadItems">
+        <!--
     <div class="upload_item">
         <div class="inline_mask" style=""></div>
         <div class="file_name">ubuntu-12.04.3-desktop-i386.iso</div>
@@ -35,13 +39,13 @@
         <div class="file_size">707M</div>
         <div class="file_upload_status">72%(564.70 KB/s)</div>
         <a class="cancle_upload" href="javascript:;" title="取消"></a>
-    </div>
+    </div>    -->
     </div>
 </div>
 
 </body>
 <script type="text/javascript">
-    //  var area = new uploaderApp.area('uploadItems'); ;
-    // area.init();
+    var main=new uploaderApp.main('container');
+    main.init();
 </script>
 </html>

@@ -125,5 +125,5 @@ window.uploader = {};
         }
     }
 
-    window.uploader = uploader;
+    window.uploader1 = uploader;
 })(document, uploader);

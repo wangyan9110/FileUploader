@@ -73,7 +73,6 @@ window.uploader = {};
             }
 
             this._xhr.onreadystatechange = function () {
-                _self = this;
                 if (_self._xhr.readyState == 4) {
                     if (typeof _self.callback === 'function') {
                         var status = _self._xhr.status;
@@ -97,7 +96,7 @@ window.uploader = {};
             }
         },
         _addFileToFormData: function (formData) {
-            if (this._files && typeof this._files === 'array') {
+            if (this._files) {
                 for (var i = 0; i < this._files.length; i++) {
                     var file = this._files[i];
                     formData.append('file[' + i + ']', this._files[i]);
@@ -116,16 +115,19 @@ window.uploader = {};
         }
     }
 
-    uploader.send = function (url, data, files, callback) {
-        var insUploader = new uploader(url, data, files);
-        insUploader.callback = function (status, resData) {
-            if (typeof callback === 'function') {
-                callback(status, resData);
+    var uploaderFactory = {
+        send: function (url, data, files, callback) {
+            var insUploader = new uploader(url, data, files);
+            insUploader.callback = function (status, resData) {
+                if (typeof callback === 'function') {
+                    callback(status, resData);
+                }
             }
+            insUploader.send();
+            return insUploader;
         }
-        insUploader.send();
-        return insUploader;
-    }
+    };
 
     window.uploader = uploader;
+    window.uploaderFactory = uploaderFactory;
 })(window);
