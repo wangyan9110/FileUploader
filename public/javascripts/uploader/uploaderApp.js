@@ -150,7 +150,7 @@ window.uploaderApp = {};
                 if (mSize < 1024) {
                     return mSize.toFixed(2) + 'M';
                 } else {
-                    var gSize = gSize / 1024;
+                    var gSize = mSize / 1024;
                     return gSize.toFixed(2) + 'G';
                 }
             }

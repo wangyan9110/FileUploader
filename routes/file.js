@@ -35,7 +35,11 @@ function uploadFile(req, res, path, index) {
             unlink(tempPath);
         }).then(function () {
                 if (index == req.files.file.length - 1) {
-                    res.send('{code:1,des:"上传成功"}');
+                    var res = {
+                        code: 1,
+                        des: '上传成功'
+                    };
+                    res.send(res);
                 } else {
                     uploadFile(req, res, path, index + 1);
                 }
